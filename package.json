@@ -1,0 +1,23 @@
+{
+  "name": "bind-squares",
+  "version": "1.0.0",
+  "description": "**How to start**",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjm2317/bind-two-squares.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjm2317/bind-two-squares/issues"
+  },
+  "homepage": "https://github.com/jjm2317/bind-two-squares#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
