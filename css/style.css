@@ -12,6 +12,7 @@
 
 .box {
   display: flex;
+  position: relative;
   flex: row nowrap;
   justify-content: space-between;
   width: 180px;
