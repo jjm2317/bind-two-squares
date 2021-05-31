@@ -1,4 +1,26 @@
 const $container = document.getElementById("container");
+
+const canvZIndex = {
+  value: 1,
+  increase() {
+    canvZIndex.value++;
+  },
+  decrease() {
+    canvZIndex--;
+  },
+};
+
+const canvasInfo = {
+  isDrawing: false,
+  get draw() {
+    return this.isDrawing;
+  },
+  set draw(value) {
+    this.isDrawing = value;
+  },
+
+  stack: [],
+};
 const startPos = {
   x: 0,
   y: 0,
@@ -24,4 +46,4 @@ const offsets = {
     },
   ],
 };
-export { startPos, offsets, $container };
+export { startPos, offsets, $container, canvZIndex, canvasInfo };

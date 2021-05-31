@@ -13,6 +13,7 @@
 .box {
   display: flex;
   position: relative;
+  z-index: 10;
   flex: row nowrap;
   justify-content: space-between;
   width: 180px;
@@ -46,7 +47,7 @@
   height: 100%;
    /* background-color: #ff0;   */
   position: absolute;
-  z-index: -111; 
+  z-index: 1; 
 }
 
 .point:hover {

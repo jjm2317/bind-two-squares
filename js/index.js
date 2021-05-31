@@ -8,7 +8,7 @@ import { $container } from "./data";
 // event handler
 $container.onmousedown = (e) => {
   if (e.target.matches(".box")) settingBoxMousedown(e);
-  // if (e.target.matches("canvas")) settingPointMousedown(e);
+  if (e.target.matches(".point")) settingPointMousedown(e);
 };
 
 $container.onmouseup = (e) => {

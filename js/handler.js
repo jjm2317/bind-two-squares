@@ -1,4 +1,4 @@
-import { startPos, offsets, $container } from "./data";
+import { startPos, offsets, $container, canvZIndex, canvasInfo } from "./data";
 import { removeEventInAllNodes } from "./util";
 
 const moveBox = (e, offset) => {
@@ -17,9 +17,33 @@ const moveBox = (e, offset) => {
 };
 
 const movePoint = (e) => {
-  const context = e.target.getContext();
-  console.log(context);
+  if (!canvasInfo.draw) return;
+  console.log(123);
+  // console.log(e.target);
+  // const context = e.target.getContext();
+  // console.log(context);
 };
+
+const makeMyCanvas = () => {
+  const canvas = document.createElement("canvas");
+  canvas.setAttribute("class", "line");
+  canvas.setAttribute("width", "1000");
+  canvas.setAttribute("heigth", "1000");
+  canvas.style.zIndex = canvZIndex.value;
+  canvZIndex.increase();
+  $container.appendChild(canvas);
+  return canvas;
+};
+const settingPointMousedown = (e) => {
+  // const offset = offsets.point.find(({ id }) => id === e.target.id);
+  // startPos.x = e.clientX - offset.x;
+  // startPos.y = e.clientY - offset.y;
+  const canvas = makeMyCanvas();
+
+  canvasInfo.draw = true;
+  $container.onmousemove = (e) => movePoint(e);
+};
+const resolveLine = (e) => {};
 
 const settingBoxMousedown = (e) => {
   e.target.style.zIndex = 99;
@@ -33,18 +57,8 @@ const settingBoxMousedown = (e) => {
   startPos.y = e.clientY - offset.y;
   e.target.onmousemove = (e) => moveBox(e, offset);
 };
-
-const settingPointMousedown = (e) => {
-  console.log(e.target);
-  console.log(e.target.getContext);
-  const offset = offsets.point.find(({ id }) => id === e.target.id);
-  startPos.x = e.clientX - offset.x;
-  startPos.y = e.clientY - offset.y;
-  $container.onmousemove = (e) => e.target.matches("canvas") && movePoint(e);
-};
-
 const settingBoxMouseup = (e) => {
-  e.target.style.zIndex = 0;
+  e.target.style.zIndex = 10;
   console.log(e.target.id);
   e.target.onmousemove = null;
 };
