@@ -69,9 +69,6 @@ const makeMyCanvas = (e) => {
   return canvas;
 };
 const settingPointMousedown = (e) => {
-  // const offset = offsets.point.find(({ id }) => id === e.target.id);
-  // startPos.x = e.clientX - offset.x;
-  // startPos.y = e.clientY - offset.y;
   canvasInfo.isDrawing = true;
   const canvas = makeMyCanvas(e);
   canvasInfo.currentNode = canvas;

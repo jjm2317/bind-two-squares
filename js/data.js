@@ -123,12 +123,5 @@ const offsets = {
       y: 0,
     },
   ],
-  point: [
-    {
-      id: "box1-point1",
-      x: 0,
-      y: 0,
-    },
-  ],
 };
 export { startPos, offsets, $container, canvZIndex, canvasInfo };
