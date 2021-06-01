@@ -63,13 +63,20 @@ const canvasInfo = {
   },
   nodes: [],
   lineOffset: {
-    value: 0,
-    increase() {
-      this.value++;
-      if (this.value > 16) {
-        this.value = 0;
-      }
-    },
+    value: 5,
+    //   increase() {
+    //     this.value++;
+    //     if (this.value > 100) {
+    //       this.value = 0;
+    //     }
+    //   },
+    //   id: null,
+    //   set intervalId(id) {
+    //     this.id = id;
+    //   },
+    //   get intervalId() {
+    //     return this.id;
+    //   },
   },
   updateLine() {
     this.nodes.forEach((node) => {

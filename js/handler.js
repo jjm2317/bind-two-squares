@@ -37,16 +37,18 @@ const drawLine = (e) => {
   const draw = () => {
     ctx.clearRect(0, 0, 1000, 1000);
     ctx.setLineDash([4, 16]);
-    ctx.lineDashOffset -= canvasInfo.lineOffset.value;
+    ctx.lineDashOffset = canvasInfo.lineOffset.value;
     ctx.beginPath();
     ctx.moveTo(canvasInfo.start.xRatio * 1000, canvasInfo.start.yRatio * 1000);
     ctx.lineTo((e.clientX / width) * 1000, (e.clientY / height) * 1000);
     ctx.stroke();
   };
+  // clearInterval(canvasInfo.lineOffset.intervalId);
   // const id = setInterval(() => {
   //   canvasInfo.lineOffset.increase();
   draw();
   // }, 100);
+  // canvasInfo.lineOffset.intervalId = id;
 };
 
 const movePoint = (e) => {
@@ -106,6 +108,8 @@ const resolveLine = (e) => {
   canvasInfo.clearCurrentDrawing();
   canvasInfo.updateLine();
   $container.onmousemove = null;
+  $container.dispatchEvent(new Event("mousedown"));
+  $container.dispatchEvent(new Event("mouseup"));
 };
 
 export {
