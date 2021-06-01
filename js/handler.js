@@ -10,7 +10,7 @@ const moveBox = (e, offset) => {
   //   e.target.style.transform = `translate3d(${offset.x}px, ${offset.y}px, 0 )`;
   //   return;
   // }
-
+  canvasInfo.updateLine();
   offset.x = e.clientX - startPos.x;
   offset.y = e.clientY - startPos.y;
 

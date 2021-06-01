@@ -62,6 +62,33 @@ const canvasInfo = {
     return this.startPos;
   },
   nodes: [],
+  updateLine() {
+    this.nodes.forEach((node) => {
+      const srcRect = $container
+        .querySelector(`#${node.id.split("-")[0]}`)
+        .getBoundingClientRect();
+      const dstRect = $container
+        .querySelector(`#${node.id.split("-")[1]}`)
+        .getBoundingClientRect();
+      const { width, height } = $container.getBoundingClientRect();
+      console.log(srcRect, dstRect);
+      const srcPointX = ((srcRect.left + srcRect.right) / 2 / width) * 1000;
+      const srcPointY = ((srcRect.top + srcRect.bottom) / 2 / height) * 1000;
+      const dstPointX = ((dstRect.left + dstRect.right) / 2 / width) * 1000;
+      const dstPointY = ((dstRect.top + dstRect.bottom) / 2 / height) * 1000;
+      console.log(srcPointX, srcPointY);
+
+      const ctx = node.getContext("2d");
+      ctx.lineWidth = 5;
+      ctx.lineCap = "round";
+      ctx.strokeStyle = "#0f0";
+      ctx.clearRect(0, 0, 1000, 1000);
+      ctx.beginPath();
+      ctx.moveTo(srcPointX, srcPointY);
+      ctx.lineTo(dstPointX, dstPointY);
+      ctx.stroke();
+    });
+  },
 };
 
 const startPos = {
