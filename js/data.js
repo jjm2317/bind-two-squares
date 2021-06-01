@@ -19,6 +19,21 @@ const canvasInfo = {
     this.isDrawing = value;
   },
 
+  node: null,
+  set currentNode(node) {
+    this.node = node;
+  },
+  get currentNode() {
+    return this.node;
+  },
+  ctx: null,
+  set currentCtx(ctx) {
+    this.ctx = ctx;
+  },
+  get currentCtx() {
+    return this.ctx;
+  },
+
   startPos: {
     x: 0,
     y: 0
@@ -27,11 +42,15 @@ const canvasInfo = {
     x: 0,
     y: 0
   },
-  initStartPos(e) {
+  initStartPos(e, container) {
     const { left, right, top, bottom } = e.target.getBoundingClientRect();
+    const { width, height } = container.getBoundingClientRect();
     this.startPos = {
-      x: (left + right) / 2 - this.offsets.x,
-      y: (top + bottom) / 2 - this.offsets.y
+      x: (left + right) / 2,
+      // - this.offsets.x
+      y: (top + bottom) / 2, // - this.offsets.ym
+      xRatio: (left + right) / 2 / width,
+      yRatio: (top + bottom) / 2 / height
     };
   },
   get start() {

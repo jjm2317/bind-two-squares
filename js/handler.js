@@ -37,9 +37,24 @@ const settingBoxMouseup = e => {
 };
 
 // line 관련 함수
+const drawLine = e => {
+  const ctx = canvasInfo.currentCtx;
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#ff0';
+  ctx.clearRect(0, 0, 1000, 1000);
+  ctx.beginPath();
+  console.log(canvasInfo.start.yRatio);
+  ctx.moveTo(canvasInfo.start.xRatio * 1000, canvasInfo.start.yRatio * 1000);
+  ctx.lineTo(90, 120 + Math.random() * 10);
+  ctx.stroke();
+};
+
 const movePoint = e => {
   if (!canvasInfo.draw) return;
-  console.log(123);
+  // console.log(canvasInfo.currentNode);
+
+  drawLine(e);
   // console.log(e.target);
   // const context = e.target.getContext();
   // console.log(context);
@@ -49,7 +64,7 @@ const makeMyCanvas = () => {
   const canvas = document.createElement('canvas');
   canvas.setAttribute('class', 'line');
   canvas.setAttribute('width', '1000');
-  canvas.setAttribute('heigth', '1000');
+  canvas.setAttribute('height', '1000');
   canvas.style.zIndex = canvZIndex.value;
   canvZIndex.increase();
   $container.appendChild(canvas);
@@ -60,8 +75,10 @@ const settingPointMousedown = e => {
   // startPos.x = e.clientX - offset.x;
   // startPos.y = e.clientY - offset.y;
   const canvas = makeMyCanvas();
-  canvasInfo.initStartPos(e);
+  canvasInfo.currentNode = canvas;
+  canvasInfo.initStartPos(e, $container);
   canvasInfo.draw = true;
+  canvasInfo.currentCtx = canvasInfo.currentNode.getContext('2d');
   console.log(canvasInfo.start);
   $container.onmousemove = e => movePoint(e);
 };
