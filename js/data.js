@@ -6,7 +6,7 @@ const canvZIndex = {
     canvZIndex.value++;
   },
   decrease() {
-    canvZIndex--;
+    canvZIndex.value--;
   },
 };
 
@@ -62,6 +62,15 @@ const canvasInfo = {
     return this.startPos;
   },
   nodes: [],
+  lineOffset: {
+    value: 0,
+    increase() {
+      this.value++;
+      if (this.value > 16) {
+        this.value = 0;
+      }
+    },
+  },
   updateLine() {
     this.nodes.forEach((node) => {
       const srcRect = $container
@@ -82,6 +91,7 @@ const canvasInfo = {
       ctx.strokeStyle = "#0f0";
       ctx.clearRect(0, 0, 1000, 1000);
       ctx.beginPath();
+      ctx.setLineDash([]);
       ctx.moveTo(srcPointX, srcPointY);
       ctx.lineTo(dstPointX, dstPointY);
       ctx.stroke();

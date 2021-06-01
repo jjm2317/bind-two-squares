@@ -33,22 +33,26 @@ const drawLine = (e) => {
   const ctx = canvasInfo.currentCtx;
   ctx.lineWidth = 5;
   ctx.lineCap = "round";
-  ctx.strokeStyle = "#ff0";
-  ctx.clearRect(0, 0, 1000, 1000);
-  ctx.beginPath();
-  ctx.moveTo(canvasInfo.start.xRatio * 1000, canvasInfo.start.yRatio * 1000);
-  ctx.lineTo((e.clientX / width) * 1000, (e.clientY / height) * 1000);
-  ctx.stroke();
+  ctx.strokeStyle = "#f00";
+  const draw = () => {
+    ctx.clearRect(0, 0, 1000, 1000);
+    ctx.setLineDash([4, 16]);
+    ctx.lineDashOffset -= canvasInfo.lineOffset.value;
+    ctx.beginPath();
+    ctx.moveTo(canvasInfo.start.xRatio * 1000, canvasInfo.start.yRatio * 1000);
+    ctx.lineTo((e.clientX / width) * 1000, (e.clientY / height) * 1000);
+    ctx.stroke();
+  };
+  // const id = setInterval(() => {
+  //   canvasInfo.lineOffset.increase();
+  draw();
+  // }, 100);
 };
 
 const movePoint = (e) => {
   if (!canvasInfo.isDrawing) return;
-  // console.log(canvasInfo.currentNode);
 
   drawLine(e);
-  // console.log(e.target);
-  // const context = e.target.getContext();
-  // console.log(context);
 };
 
 const makeMyCanvas = (e) => {
@@ -66,10 +70,10 @@ const settingPointMousedown = (e) => {
   // const offset = offsets.point.find(({ id }) => id === e.target.id);
   // startPos.x = e.clientX - offset.x;
   // startPos.y = e.clientY - offset.y;
+  canvasInfo.isDrawing = true;
   const canvas = makeMyCanvas(e);
   canvasInfo.currentNode = canvas;
   canvasInfo.initStartPos(e, $container);
-  canvasInfo.isDrawing = true;
   canvasInfo.currentCtx = canvasInfo.currentNode.getContext("2d");
   $container.onmousemove = (e) => movePoint(e);
 };
@@ -82,15 +86,26 @@ const resolveLine = (e) => {
     $container.removeChild(canvasInfo.currentNode);
     canvasInfo.clearCurrentDrawing();
     $container.onmousemove = null;
+    canvZIndex.decrease();
     return;
   }
   canvasInfo.currentNode.setAttribute(
     "id",
     canvasInfo.currentNode.id + "-" + e.target.id
   );
+  if (canvasInfo.nodes.some((node) => node.id === canvasInfo.currentNode.id)) {
+    console.log(111);
+    $container.removeChild(canvasInfo.currentNode);
+    canvasInfo.clearCurrentDrawing();
+    $container.onmousemove = null;
+    canvZIndex.decrease();
+    alert("이미 연결된 선입니다.");
+    return;
+  }
   canvasInfo.nodes.push(canvasInfo.currentNode);
   canvasInfo.clearCurrentDrawing();
   canvasInfo.updateLine();
+  $container.onmousemove = null;
 };
 
 export {
