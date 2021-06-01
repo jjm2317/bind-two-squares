@@ -52,7 +52,7 @@ const drawLine = (e) => {
 };
 
 const movePoint = (e) => {
-  if (!canvasInfo.draw) return;
+  if (!canvasInfo.isDrawing) return;
   // console.log(canvasInfo.currentNode);
 
   drawLine(e);
@@ -79,7 +79,7 @@ const settingPointMousedown = (e) => {
   const canvas = makeMyCanvas(e);
   canvasInfo.currentNode = canvas;
   canvasInfo.initStartPos(e, $container);
-  canvasInfo.draw = true;
+  canvasInfo.isDrawing = true;
   canvasInfo.currentCtx = canvasInfo.currentNode.getContext("2d");
   console.log(canvasInfo.start);
   $container.onmousemove = (e) => movePoint(e);
@@ -87,7 +87,8 @@ const settingPointMousedown = (e) => {
 const resolveLine = (e) => {
   if (
     !e.target.matches(".point") ||
-    e.target.id === canvasInfo.currentNode.id
+    //같은 박스 안에 있어도 return;
+    e.target.id.split("__")[0] === canvasInfo.currentNode.id.split("__")[0]
   ) {
     canvasInfo.clear();
     $container.onmousemove = null;

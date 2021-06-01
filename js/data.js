@@ -11,12 +11,12 @@ const canvZIndex = {
 };
 
 const canvasInfo = {
-  isDrawing: false,
-  get draw() {
-    return this.isDrawing;
+  drawing: false,
+  get isDrawing() {
+    return this.drawing;
   },
-  set draw(value) {
-    this.isDrawing = value;
+  set isDrawing(value) {
+    this.drawing = value;
   },
 
   node: null,
@@ -34,9 +34,9 @@ const canvasInfo = {
     return this.ctx;
   },
 
-  clear() {
+  clearCurrentDrawing() {
     $container.removeChild(this.currentNode);
-    (this.draw = false), (this.currentCtx = null);
+    (this.isDrawing = false), (this.currentCtx = null);
     this.currentNode = null;
   },
 
@@ -62,7 +62,7 @@ const canvasInfo = {
   get start() {
     return this.startPos;
   },
-  stack: [],
+  nodes: [],
 };
 
 const startPos = {
