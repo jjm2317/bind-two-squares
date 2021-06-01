@@ -43,7 +43,6 @@ const drawLine = (e) => {
   ctx.strokeStyle = "#ff0";
   ctx.clearRect(0, 0, 1000, 1000);
   ctx.beginPath();
-  console.log(canvasInfo.start.yRatio);
   ctx.moveTo(canvasInfo.start.xRatio * 1000, canvasInfo.start.yRatio * 1000);
   ctx.lineTo((e.clientX / width) * 1000, (e.clientY / height) * 1000);
   ctx.stroke();
@@ -79,7 +78,6 @@ const settingPointMousedown = (e) => {
   canvasInfo.initStartPos(e, $container);
   canvasInfo.isDrawing = true;
   canvasInfo.currentCtx = canvasInfo.currentNode.getContext("2d");
-  console.log(canvasInfo.start);
   $container.onmousemove = (e) => movePoint(e);
 };
 const resolveLine = (e) => {

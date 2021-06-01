@@ -71,12 +71,10 @@ const canvasInfo = {
         .querySelector(`#${node.id.split("-")[1]}`)
         .getBoundingClientRect();
       const { width, height } = $container.getBoundingClientRect();
-      console.log(srcRect, dstRect);
       const srcPointX = ((srcRect.left + srcRect.right) / 2 / width) * 1000;
       const srcPointY = ((srcRect.top + srcRect.bottom) / 2 / height) * 1000;
       const dstPointX = ((dstRect.left + dstRect.right) / 2 / width) * 1000;
       const dstPointY = ((dstRect.top + dstRect.bottom) / 2 / height) * 1000;
-      console.log(srcPointX, srcPointY);
 
       const ctx = node.getContext("2d");
       ctx.lineWidth = 5;
