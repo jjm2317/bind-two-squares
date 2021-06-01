@@ -2,8 +2,9 @@ import {
   settingBoxMousedown,
   settingPointMousedown,
   settingBoxMouseup,
+  resolveLine,
 } from "./handler";
-import { $container } from "./data";
+import { $container, canvasInfo } from "./data";
 
 // event handler
 $container.onmousedown = (e) => {
@@ -12,5 +13,7 @@ $container.onmousedown = (e) => {
 };
 
 $container.onmouseup = (e) => {
-  if (e.target.matches(".box")) settingBoxMouseup(e);
+  if (!canvasInfo.draw && e.target.matches(".box")) settingBoxMouseup(e);
+
+  if (canvasInfo.draw) resolveLine(e);
 };
