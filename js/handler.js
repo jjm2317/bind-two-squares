@@ -3,18 +3,11 @@ import { removeEventInAllNodes } from "./util";
 
 // box 관련 함수
 const moveBox = (e, offset) => {
-  // const { top, left } = e.target.getBoundingClientRect();
-  // if (top <= 0 || left <= 0) {
-  //   if (top <= 0) offset.y -= top;
-  //   if (left <= 0) offset.x -= left;
-  //   e.target.style.transform = `translate3d(${offset.x}px, ${offset.y}px, 0 )`;
-  //   return;
-  // }
-  canvasInfo.updateLine();
   offset.x = e.clientX - startPos.x;
   offset.y = e.clientY - startPos.y;
 
   e.target.style.transform = `translate3d(${offset.x}px, ${offset.y}px, 0 )`;
+  canvasInfo.updateLine();
 };
 
 const settingBoxMousedown = (e) => {
