@@ -90,11 +90,17 @@ const resolveLine = (e) => {
     //같은 박스 안에 있어도 return;
     e.target.id.split("__")[0] === canvasInfo.currentNode.id.split("__")[0]
   ) {
-    canvasInfo.clear();
+    $container.removeChild(canvasInfo.currentNode);
+    canvasInfo.clearCurrentDrawing();
     $container.onmousemove = null;
     return;
   }
-  console.log(e.target, canvasInfo.currentNode);
+  canvasInfo.currentNode.setAttribute(
+    "id",
+    canvasInfo.currentNode.id + "-" + e.target.id
+  );
+  canvasInfo.nodes.push(canvasInfo.currentNode);
+  canvasInfo.clearCurrentDrawing();
 };
 
 export {

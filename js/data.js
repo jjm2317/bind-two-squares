@@ -35,7 +35,6 @@ const canvasInfo = {
   },
 
   clearCurrentDrawing() {
-    $container.removeChild(this.currentNode);
     (this.isDrawing = false), (this.currentCtx = null);
     this.currentNode = null;
   },

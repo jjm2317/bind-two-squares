@@ -13,7 +13,7 @@ $container.onmousedown = (e) => {
 };
 
 $container.onmouseup = (e) => {
-  if (!canvasInfo.draw && e.target.matches(".box")) settingBoxMouseup(e);
+  if (!canvasInfo.isDrawing && e.target.matches(".box")) settingBoxMouseup(e);
 
-  if (canvasInfo.draw) resolveLine(e);
+  if (canvasInfo.isDrawing) resolveLine(e);
 };
