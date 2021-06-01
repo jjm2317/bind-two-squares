@@ -61,8 +61,9 @@ const movePoint = (e) => {
   // console.log(context);
 };
 
-const makeMyCanvas = () => {
+const makeMyCanvas = (e) => {
   const canvas = document.createElement("canvas");
+  canvas.setAttribute("id", e.target.id);
   canvas.setAttribute("class", "line");
   canvas.setAttribute("width", "1000");
   canvas.setAttribute("height", "1000");
@@ -75,7 +76,7 @@ const settingPointMousedown = (e) => {
   // const offset = offsets.point.find(({ id }) => id === e.target.id);
   // startPos.x = e.clientX - offset.x;
   // startPos.y = e.clientY - offset.y;
-  const canvas = makeMyCanvas();
+  const canvas = makeMyCanvas(e);
   canvasInfo.currentNode = canvas;
   canvasInfo.initStartPos(e, $container);
   canvasInfo.draw = true;
@@ -84,11 +85,15 @@ const settingPointMousedown = (e) => {
   $container.onmousemove = (e) => movePoint(e);
 };
 const resolveLine = (e) => {
-  if (!e.target.matches(".point")) {
+  if (
+    !e.target.matches(".point") ||
+    e.target.id === canvasInfo.currentNode.id
+  ) {
     canvasInfo.clear();
     $container.onmousemove = null;
     return;
   }
+  console.log(e.target, canvasInfo.currentNode);
 };
 
 export {
