@@ -19,7 +19,6 @@ const moveBox = (e, offset) => {
 
 const settingBoxMousedown = (e) => {
   e.target.style.zIndex = 99;
-  console.log(e.target.id);
   /*다른 box 클릭시 기존 box에 mousemove이벤트가 남아있는 버그 수정*/
   removeEventInAllNodes(e.currentTarget.children, "onmousemove");
 
@@ -32,7 +31,6 @@ const settingBoxMousedown = (e) => {
 
 const settingBoxMouseup = (e) => {
   e.target.style.zIndex = 10;
-  console.log(e.target.id);
   e.target.onmousemove = null;
 };
 
@@ -101,6 +99,7 @@ const resolveLine = (e) => {
   );
   canvasInfo.nodes.push(canvasInfo.currentNode);
   canvasInfo.clearCurrentDrawing();
+  canvasInfo.updateLine();
 };
 
 export {
