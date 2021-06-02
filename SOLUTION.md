@@ -90,9 +90,10 @@ updateLine() {
 
 _요소의 **처음 위치(드래기 되기 전) 기준 드래그된 거리**를 알아내서 transform: translate3D적용_
 
-두가지 위치가 필요하다.
+드래그된 거리를 알기 위해서는 두가지 위치가 필요하다.
 
 - 처음 위치(startPos)
+  - 박스 요소가 드래그 되기 전의 x, y 좌표이다. (mousedown 기준)
 - 처음 위치 기준 요소가 이동한 거리 (offset)
 
 ```js
@@ -163,6 +164,7 @@ const moveBox = (e, offset) => {
   canvasInfo.updateLine();
 };
 ```
+css 속성 transform에 translate3d 값을 적용함으로서 드래그 기능을 구현할 수 있다. translate3d의 인수로는 offset의 x와 y 값이 전달된다.
 
 동작
 
@@ -178,6 +180,8 @@ const moveBox = (e, offset) => {
 
 **요구사항**
 
+유의해야할 요구사항은 다음과 같다.
+
 - 점에 mousedown 시 canvas요소를 생성하여 dom tree에 추가(**line 생성**)
 - mouseup 되는 지점이 점이 아니면 line(canvas 요소) 제거
 - mouseup 되는 지점이 다른 박스의 점이면 canvas 요소 
@@ -187,11 +191,13 @@ const moveBox = (e, offset) => {
 
 **line 하나당 하나의 canvas 요소를 생성**하여 선 표현
 
-_canvas 요소는 시점과 종점을 알면 선을 그릴 수 있다. 시점, 종점 계산은element.getBoundingClientRect 을 이용한다._
+1. canvas 요소는 시점과 종점을 알면 선을 그릴 수 있다. 시점, 종점 계산은element.getBoundingClientRect 을 이용한다.
 
-_mouseup 이벤트가 다른 박스의 점에서 일어날 때 선을 생성 및 canvas 요소데이터 저장_
+2. mouseup 이벤트가 다른 박스의 점에서 일어날 때 선을 생성 및 canvas 요소데이터 저장
 
-_박스에 mousemove이벤트가 일어날 때 canvas요소데이터의 id 값을 이용하여 점 요소들을 검색(점의 id 가 각각 box1_point1, box2_point2라면 canvas 요소의 id는 box1_point1-box2_point2) 후 시점과 종점 계산후 선 리렌더링_
+여기까지는 선의 생성이며, 선이 생성된 이후에는,
+
+3. 박스에 mousemove이벤트가 일어날 때 canvas요소데이터의 id 값을 이용하여 점 요소들을 검색(점의 id 가 각각 box1_point1, box2_point2라면 canvas 요소의 id는 box1_point1-box2_point2) 후 시점과 종점 계산후 선 리렌더링_
 
 ### canvas 사용
 
