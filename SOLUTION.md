@@ -180,6 +180,7 @@ const moveBox = (e, offset) => {
 
 - 점에 mousedown 시 canvas요소를 생성하여 dom tree에 추가(**line 생성**)
 - mouseup 되는 지점이 점이 아니면 line(canvas 요소) 제거
+- mouseup 되는 지점이 다른 박스의 점이면 canvas 요소 
 - line이 생성된 이후 박스를 움직일 시 line의 위치를 계산하여 다시 렌더링
 
 **해결과정 요약**
@@ -235,6 +236,8 @@ const intervalId = setInterval(() => {
 ```
 
 - 해상도 이슈는 canvas 요소의 width, height attribute를 1000으로 변경하는 것으로 해결
+
+다음은 line을 생성할 때 발생하는 이벤트 별 프로그램의 동작에 대한 설명이다. 
 
 ### mousedown
 
@@ -299,6 +302,7 @@ const drawLine = (e) => {
   draw();
 };
 ```
+위 같은 방법으로 line을 생성한다. 다음은 line이 생성된 이후 box를 mousemove 할때의 동작과정이다.
 
 #### line이 연결된 점을 포함한 box를 mousemove
 
@@ -348,6 +352,7 @@ updateLine() {
   },
 };
 ```
+위 과정을 통해 box를 드래그 및 이동을 line에 반영할 수 있다.
 
 동작
 
