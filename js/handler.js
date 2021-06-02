@@ -93,7 +93,6 @@ const resolveLine = (e) => {
     canvasInfo.currentNode.id + "-" + e.target.id
   );
   if (canvasInfo.nodes.some((node) => node.id === canvasInfo.currentNode.id)) {
-    console.log(111);
     $container.removeChild(canvasInfo.currentNode);
     canvasInfo.clearCurrentDrawing();
     $container.onmousemove = null;
